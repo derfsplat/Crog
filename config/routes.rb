@@ -1,8 +1,14 @@
 Blog::Application.routes.draw do
-  resources :blog_posts
-
+  resources :blog_posts, :path => 'blogposts'
+  #controller override but with this link helpers generate links with underscore
+  # resources :blogposts, :controller => 'blog_posts'
 
   get "home/index"
+  #custom map route to resource
+  get 'home/newaction' => 'blog_posts#index'
+
+  #variables in route
+  get ':title/p/:id' => 'blog_posts#show', :id => /[0-9]+/
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
