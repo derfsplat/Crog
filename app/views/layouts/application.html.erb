@@ -8,6 +8,11 @@
 </head>
 <body>
 
+<% if content_for? :header %>
+    <%= yield :header %>
+<% else %>
+    <h1>Welcome to Crog, Crappy Blog</h1>
+<%end%>
 <%= yield %>
 
 </body>

@@ -10,6 +10,10 @@
     <th></th>
   </tr>
 
+  <% content_for :header do %>
+      <p> Blog post index</p>
+  <% end %>
+
 <% @blog_posts.each do |blog_post| %>
   <tr>
     <td><%= blog_post.title %></td>
