@@ -13,15 +13,15 @@
 
   <div class="field">
     <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :disabled => readonly ||= false %>
   </div>
   <div class="field">
     <%= f.label :content %><br />
-    <%= f.text_field :content %>
+    <%= f.text_field :content, :disabled => readonly ||= false %>
   </div>
   <div class="field">
     <%= f.label :publishdate %><br />
-    <%= f.datetime_select :publishdate %>
+    <%= f.datetime_select :publishdate, :disabled => readonly ||= false %>
   </div>
   <div class="actions">
     <%= f.submit %>
