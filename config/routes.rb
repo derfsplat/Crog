@@ -1,4 +1,6 @@
 Blog::Application.routes.draw do
+  devise_for :users
+
   resources :blog_posts, :path => 'blogposts'
   #controller override but with this link helpers generate links with underscore
   # resources :blogposts, :controller => 'blog_posts'
