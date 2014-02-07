@@ -1,2 +1,6 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<% @posts.each do |p| %>
+    <p>
+      <h2><%=link_to p.title, p %></h2>
+      <%= p.content[0...100]%>
+    </p>
+<% end %>
