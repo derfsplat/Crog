@@ -11,11 +11,20 @@ class BlogPostsController < ApplicationController
     end
   end
 
+  # POST /comment
+  def comment
+    @comment = Comment.new(params[:comment])
+
+    unless @comment.save
+      flash[:comment_errors] = @comment.errors.full_messages
+    end
+
+    redirect_to blog_post_path(@comment.blog_post_id)
+  end
+
   # GET /blog_posts/1
   # GET /blog_posts/1.json
   def show
-    authenticate_user!
-    
     @blog_post = BlogPost.find(params[:id])
 
     respond_to do |format|

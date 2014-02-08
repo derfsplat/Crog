@@ -12,6 +12,8 @@ Blog::Application.routes.draw do
   #variables in route
   get ':title/p/:id' => 'blog_posts#show', :id => /[0-9]+/
 
+  post 'blogposts/comment' => 'blog_posts#comment'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,20 +1,30 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Title:</b>
-  <%= @blog_post.title %>
+  <h2><%= @blog_post.title %></h2>
+  <%= @blog_post.publishdate.strftime('%Y-%m-%d %I:%M')%>
 </p>
-
 <p>
-  <b>Content:</b>
-  <%= @blog_post.content %>
+  <%= @blog_post.content%>
 </p>
-
 <p>
-  <b>Publishdate:</b>
-  <%= @blog_post.publishdate %>
+  <br/>
 </p>
-
-
-<%= link_to 'Edit', edit_blog_post_path(@blog_post) %> |
+<h3>Leave A Comment</h3>
+<%= form_tag('/blogposts/comment') do %>
+    <%= label_tag 'Email: '.concat(current_user.email) %><br/>
+    <%= hidden_field_tag 'comment[email]', current_user.email %><br/>
+    <%= label_tag 'Comment:' %><br/>
+    <%= text_area_tag 'comment[comment]', ''%><br/>
+    <%= hidden_field_tag 'comment[blog_post_id]', @blog_post.id %>
+    <%= submit_tag 'Post' %>
+<% end%>
+<h3>Comments</h3>
+<% @blog_post.comments.each do |c| %>
+    <p>
+      <%= "#{c.email} #{c.created_at.strftime('%Y-%m-%d %I:%M')}"%><br/>
+      <%= c.comment %>
+    </p>
+<% end %>
+<%= link_to 'Edit', edit_blog_post_path(@blog_post) if user_signed_in? %> |
 <%= link_to 'Back', blog_posts_path %>
