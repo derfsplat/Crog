@@ -4,15 +4,18 @@ class BlogPostsController < ApplicationController
   def index
     @blog_posts = BlogPost.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @blog_posts }
+    if user_signed_in?
+      render
+    else
+      render 'home/index'
     end
   end
 
   # GET /blog_posts/1
   # GET /blog_posts/1.json
   def show
+    authenticate_user!
+    
     @blog_post = BlogPost.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +27,8 @@ class BlogPostsController < ApplicationController
   # GET /blog_posts/new
   # GET /blog_posts/new.json
   def new
+    authenticate_user!
+
     @blog_post = BlogPost.new
 
     respond_to do |format|
@@ -34,12 +39,16 @@ class BlogPostsController < ApplicationController
 
   # GET /blog_posts/1/edit
   def edit
+    authenticate_user!
+
     @blog_post = BlogPost.find(params[:id])
   end
 
   # POST /blog_posts
   # POST /blog_posts.json
   def create
+    authenticate_user!
+
     @blog_post = BlogPost.new(params[:blog_post])
 
     respond_to do |format|
@@ -56,6 +65,8 @@ class BlogPostsController < ApplicationController
   # PUT /blog_posts/1
   # PUT /blog_posts/1.json
   def update
+    authenticate_user!
+
     @blog_post = BlogPost.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +83,8 @@ class BlogPostsController < ApplicationController
   # DELETE /blog_posts/1
   # DELETE /blog_posts/1.json
   def destroy
+    authenticate_user!
+
     @blog_post = BlogPost.find(params[:id])
     @blog_post.destroy
 

@@ -1,4 +1,4 @@
-<% @posts.each do |p| %>
+<% @blog_posts.each do |p| %>
     <p>
       <h2><%=link_to p.title, p %></h2>
       <%= p.content[0...100]%>
