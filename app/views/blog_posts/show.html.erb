@@ -10,15 +10,17 @@
 <p>
   <br/>
 </p>
-<h3>Leave A Comment</h3>
-<%= form_tag('/blogposts/comment') do %>
-    <%= label_tag 'Email: '.concat(current_user.email) %><br/>
-    <%= hidden_field_tag 'comment[email]', current_user.email %><br/>
-    <%= label_tag 'Comment:' %><br/>
-    <%= text_area_tag 'comment[comment]', ''%><br/>
-    <%= hidden_field_tag 'comment[blog_post_id]', @blog_post.id %>
-    <%= submit_tag 'Post' %>
-<% end%>
+<% unless current_user.nil? %>
+    <h3>Leave A Comment</h3>
+    <%= form_tag('/blogposts/comment') do %>
+        <%= label_tag 'Email: '.concat(current_user.email) %><br/>
+        <%= hidden_field_tag 'comment[email]', current_user.email %><br/>
+        <%= label_tag 'Comment:' %><br/>
+        <%= text_area_tag 'comment[comment]', ''%><br/>
+        <%= hidden_field_tag 'comment[blog_post_id]', @blog_post.id %>
+        <%= submit_tag 'Post' %>
+    <% end %>
+<% end %>
 <h3>Comments</h3>
 <% @blog_post.comments.each do |c| %>
     <p>
